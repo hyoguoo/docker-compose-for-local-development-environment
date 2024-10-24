@@ -1,5 +1,3 @@
-version: '3.8'
-
 volumes:
   mysql_data:
     name: mysql_data
