@@ -1,13 +1,13 @@
 version: '3.8'
 
 services:
-  mysql-master:
+  mysql:
     image: mysql:8.0.33
     build:
       context: ../services/mysql
       dockerfile: ./Dockerfile
-    hostname: mysql_master
-    container_name: mysql_master
+    hostname: mysql
+    container_name: mysql
     networks:
       dev_net:
         ipv4_address: ${MYSQL_IP}
@@ -18,9 +18,9 @@ services:
       MYSQL_DATABASE: default_db
       TZ: Asia/Seoul
     volumes:
-      - ../init/mysql_master/my.cnf:/etc/mysql/my.cnf
-      - ../init/mysql_master:/docker-entrypoint-initdb.d
-      - mysql_data_master:/var/lib/mysql:rw
+      - ../init/mysql/my.cnf:/etc/mysql/my.cnf
+      - ../init/mysql:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql:rw
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
@@ -34,42 +34,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-  mysql-slave:
-    image: mysql:8.0.33
-    build:
-      context: ../services/mysql
-      dockerfile: ./Dockerfile
-    hostname: mysql_slave
-    container_name: mysql_slave
-    networks:
-      dev_net:
-        ipv4_address: ${MYSQL_SLAVE_IP}
-    ports:
-      - ${MYSQL_SLAVE_PORT}:3306
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_SLAVE_ROOT_PW}
-      MYSQL_DATABASE: default_db
-      TZ: Asia/Seoul
-    volumes:
-      - ../init/mysql_slave/my.cnf:/etc/mysql/my.cnf
-      - ../init/mysql_slave:/docker-entrypoint-initdb.d
-      - mysql_data_slave:/var/lib/mysql:rw
-    command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
-    deploy:
-      resources:
-        limits:
-          cpus: '2.0'
-          memory: 4096M
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-    depends_on:
-      mysql-master:
-        condition: service_healthy
   redis:
     image: redis:7.0.11
     build:

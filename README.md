@@ -26,16 +26,15 @@ compose.sh              # docker-compose 실행 스크립트
 
 ### 지원하는 서비스
 
-|      서비스       |   컨테이너 이름    |  포트   |
-|:--------------:|:------------:|:-----:|
-| MySQL - Master | mysql_master | 3306  |
-| MySQL - Slave  | mysql_slave  | 3307  |
-|     Redis      |    redis     | 6379  |
-|   Memcached    |  memcached   | 11211 |
+|    서비스    |  컨테이너 이름  |  포트   |
+|:---------:|:---------:|:-----:|
+|   MySQL   |   mysql   | 3306  |
+|   Redis   |   redis   | 6379  |
+| Memcached | memcached | 11211 |
 
 #### MySQL Init Script
 
-`init/mysql_master` 디렉토리에 `01-schema.sql`, `02-ddl.sql`, `03-dml.sql` 파일을 작성하면 로컬 개발 환경 세팅 시 자동으로 실행됩니다.
+`init/mysql` 디렉토리에 `01-schema.sql`, `02-ddl.sql`, `03-dml.sql` 파일을 작성하면 로컬 개발 환경 세팅 시 자동으로 실행됩니다.
 
 - `01-schema.sql`: 스키마 생성을 위한 쿼리 작성
 - `02-ddl.sql`: 테이블 생성을 위한 DDL 쿼리 작성
