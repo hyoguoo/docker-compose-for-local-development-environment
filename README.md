@@ -31,6 +31,8 @@ compose.sh              # docker-compose 실행 스크립트
 |   MySQL   |   mysql   | 3306  |
 |   Redis   |   redis   | 6379  |
 | Memcached | memcached | 11211 |
+| Zookeeper | zookeeper | 2181  |
+|   Kafka   |   kafka   | 9092  |
 
 #### MySQL Init Script
 
@@ -41,6 +43,14 @@ compose.sh              # docker-compose 실행 스크립트
 - `03-dml.sql`: seed 데이터 생성을 위한 DML 쿼리 작성
 
 ** 테이블 변경이나 데이터 변경 시 `sh compose.sh down` 후 `sh compose.sh up`을 실행해야 변경사항이 반영됩니다.(=`sh compose.sh rerun`)
+
+#### Kafka Init Topic
+
+`compose` 디렉토리에 `.env` 파일의 `KAFKA_TOPICS` 환경 변수에 topic 이름을 추가하면 로컬 개발 환경 세팅 시 자동으로 topic을 생성합니다.
+
+```shell
+KAFKA_TOPICS=topic1,topic2,topic3
+```
 
 ### 실행
 
