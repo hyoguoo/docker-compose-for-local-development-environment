@@ -77,9 +77,6 @@ services:
           memory: 1024M
   zookeeper:
     platform: linux/amd64
-    build:
-      context: ../services/zookeeper
-      dockerfile: ./Dockerfile
     hostname: zookeeper
     container_name: zookeeper
     restart: always
@@ -91,9 +88,6 @@ services:
     environment:
       ALLOW_ANONYMOUS_LOGIN: "yes"
   kafka:
-    build:
-      context: ../services/kafka
-      dockerfile: ./Dockerfile
     hostname: kafka
     container_name: kafka
     restart: always
