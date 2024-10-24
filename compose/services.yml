@@ -67,7 +67,7 @@ services:
           cpus: '1.0'
           memory: 1024M
   zookeeper:
-    image: bitnami/zookeeper:${ZOOKEEPER_VERSION}
+    image: wurstmeister/zookeeper:${ZOOKEEPER_VERSION}
     platform: linux/amd64
     hostname: zookeeper
     container_name: zookeeper
@@ -80,7 +80,7 @@ services:
     environment:
       ALLOW_ANONYMOUS_LOGIN: "yes"
   kafka:
-    image: bitnami/kafka:${KAFKA_VERSION}
+    image: wurstmeister/kafka:${KAFKA_VERSION}
     hostname: kafka
     container_name: kafka
     restart: always
