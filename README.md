@@ -77,20 +77,31 @@ sh compose.sh rerun
 ```
 ❯ sh compose.sh rerun
 [+] Running 9/9
- ✔ Network compose_dev_net     Created 
- ✔ Volume "redis_data"         Created 
- ✔ Volume "redis_conf"         Created 
- ✔ Volume "mysql_data_master"  Created 
- ✔ Volume "mysql_data_slave"   Created 
- ✔ Container mysql_master      Healthy 
- ✔ Container redis             Started 
- ✔ Container mysql_slave       Healthy 
- ✔ Container memcached         Started 
-NAME                IMAGE               COMMAND                  SERVICE             CREATED             STATUS                    PORTS
-memcached           memcached:1.6.18    "docker-entrypoint.s…"   memcached           22 seconds ago      Up Less than a second     0.0.0.0:11211->11211/tcp
-mysql_master        mysql:8.0.33        "docker-entrypoint.s…"   mysql-master        22 seconds ago      Up 21 seconds (healthy)   0.0.0.0:3306->3306/tcp, 33060/tcp
-mysql_slave         mysql:8.0.33        "docker-entrypoint.s…"   mysql-slave         22 seconds ago      Up 10 seconds (healthy)   33060/tcp, 0.0.0.0:3307->3306/tcp
-redis               redis:7.0.11        "docker-entrypoint.s…"   redis               22 seconds ago      Up 21 seconds             0.0.0.0:6379->6379/tcp
+ ✔ Container zookeeper      Removed                                                                                                                                                                                                                                                                                                                                   0.5s 
+ ✔ Container kafka          Removed                                                                                                                                                                                                                                                                                                                                   1.0s 
+ ✔ Container mysql          Removed                                                                                                                                                                                                                                                                                                                                   1.3s 
+ ✔ Container redis          Removed                                                                                                                                                                                                                                                                                                                                   0.1s 
+ ✔ Container memcached      Removed                                                                                                                                                                                                                                                                                                                                   1.1s 
+ ✔ Volume redis_conf        Removed                             __                                                                                                                                                                                                                                                                                                      0.0s 
+ ✔ Volume redis_data        Removed                                                                                                                                                                                                                                                                                                                                   0.0s 
+ ✔ Volume mysql_data        Removed                                                                                                                                                                                                                                                                                                                                   0.0s 
+ ✔ Network compose_dev_net  Removed                                                                                                                                                                                                                                                                                                                                   0.1s 
+[+] Running 9/9
+ ✔ Network compose_dev_net  Created                                                                                                                                                                                                                                                                                                                                   0.0s 
+ ✔ Volume "redis_data"      Created                                                                                                                                                                                                                                                                                                                                   0.0s 
+ ✔ Volume "redis_conf"      Created                                                                                                                                                                                                                                                                                                                                   0.0s 
+ ✔ Volume "mysql_data"      Created                                                                                                                                                                                                                                                                                                                                   0.0s 
+ ✔ Container mysql          Started                                                                                                                                                                                                                                                                                                                                   0.2s 
+ ✔ Container kafka          Started                                                                                                                                                                                                                                                                                                                                   0.2s 
+ ✔ Container memcached      Started                                                                                                                                                                                                                                                                                                                                   0.2s 
+ ✔ Container zookeeper      Started                                                                                                                                                                                                                                                                                                                                   0.2s 
+ ✔ Container redis          Started                                                                                                                                                                                                                                                                                                                                   0.2s 
+NAME        IMAGE                     COMMAND                  SERVICE     CREATED                  STATUS                                     PORTS
+kafka       bitnami/kafka:3.3.2       "/opt/bitnami/script…"   kafka       Less than a second ago   Up Less than a second                      0.0.0.0:9092->9092/tcp
+memcached   memcached:1.6.18          "docker-entrypoint.s…"   memcached   Less than a second ago   Up Less than a second                      0.0.0.0:11211->11211/tcp
+mysql       mysql:8.0.33              "docker-entrypoint.s…"   mysql       Less than a second ago   Up Less than a second (health: starting)   0.0.0.0:3306->3306/tcp, 33060/tcp
+redis       redis:7.0.11              "docker-entrypoint.s…"   redis       Less than a second ago   Up Less than a second                      0.0.0.0:6379->6379/tcp
+zookeeper   bitnami/zookeeper:3.8.4   "/opt/bitnami/script…"   zookeeper   Less than a second ago   Up Less than a second                      2888/tcp, 3888/tcp, 0.0.0.0:2181->2181/tcp, 8080/tcp
 ```
 
 ### 컨테이너 접속
