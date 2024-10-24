@@ -1,16 +1,13 @@
 services:
   mysql:
-    image: mysql:8.0.33
-    build:
-      context: ../services/mysql
-      dockerfile: ./Dockerfile
+    image: mysql:${MYSQL_VERSION}
     hostname: mysql
     container_name: mysql
     networks:
       dev_net:
         ipv4_address: ${MYSQL_IP}
     ports:
-      - ${MYSQL_PORT}:3306
+      - ${MYSQL_HOST_PORT}:${MYSQL_CONTAINER_PORT}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PW}
       MYSQL_DATABASE: default_db
@@ -33,10 +30,7 @@ services:
       timeout: 5s
       retries: 3
   redis:
-    image: redis:7.0.11
-    build:
-      context: ../services/redis
-      dockerfile: ./Dockerfile
+    image: redis:${REDIS_VERSION}
     hostname: redis
     container_name: redis
     restart: always
@@ -44,7 +38,7 @@ services:
       dev_net:
         ipv4_address: ${REDIS_IP}
     ports:
-      - ${REDIS_PORT}:6379
+      - ${REDIS_HOST_PORT}:${REDIS_CONTAINER_PORT}
     labels:
       - "name=redis"
       - "mode=standalone"
@@ -57,10 +51,7 @@ services:
           cpus: '1.0'
           memory: 1024M
   memcached:
-    image: memcached:1.6.18
-    build:
-      context: ../services/memcached
-      dockerfile: ./Dockerfile
+    image: memcached:${MEMCACHED_VERSION}
     hostname: memcached
     container_name: memcached
     restart: always
@@ -68,7 +59,7 @@ services:
       dev_net:
         ipv4_address: ${MEMCACHED_IP}
     ports:
-      - ${MEMCACHED_PORT}:11211
+      - ${MEMCACHED_HOST_PORT}:${MEMCACHED_CONTAINER_PORT}
     command: [ "-m", "1024" ]
     deploy:
       resources:
@@ -76,6 +67,7 @@ services:
           cpus: '1.0'
           memory: 1024M
   zookeeper:
+    image: bitnami/zookeeper:${ZOOKEEPER_VERSION}
     platform: linux/amd64
     hostname: zookeeper
     container_name: zookeeper
@@ -84,10 +76,11 @@ services:
       dev_net:
         ipv4_address: ${ZOOKEEPER_IP}
     ports:
-      - ${ZOOKEEPER_PORT}:2181
+      - ${ZOOKEEPER_HOST_PORT}:${ZOOKEEPER_CONTAINER_PORT}
     environment:
       ALLOW_ANONYMOUS_LOGIN: "yes"
   kafka:
+    image: bitnami/kafka:${KAFKA_VERSION}
     hostname: kafka
     container_name: kafka
     restart: always
@@ -95,7 +88,7 @@ services:
         dev_net:
             ipv4_address: ${KAFKA_IP}
     ports:
-      - ${KAFKA_PORT}:9092
+      - ${KAFKA_HOST_PORT}:${KAFKA_CONTAINER_PORT}
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
       KAFKA_CREATE_TOPICS: ${KAFKA_TOPICS}
