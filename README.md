@@ -16,11 +16,6 @@ init                    # 초기화 스크립트 디렉토리
   │   ├── 02-ddl.sql
   │   └── 03-dml.sql
   └── ...
-services                # 서비스별 Dockerfile 디렉토리
-  ├── svc_memcached
-  │   ├── Dockerfile
-  │   └── ...
-  └── ...
 compose.sh              # docker-compose 실행 스크립트
 ```
 
