@@ -44,13 +44,23 @@ compose.sh              # docker-compose 실행 스크립트
 
 ### 실행
 
+- up: 컨테이너를 백그라운드로 실행합니다.
+
 ```shell
-sh compose.sh [up|down|rerun]
+sh compose.sh up
 ```
 
-- up: 컨테이너를 백그라운드로 실행합니다.
 - down: 실행 중인 컨테이너를 중지하고 볼륨을 삭제합니다.
+
+```shell
+sh compose.sh down
+```
+
 - rerun: 실행 중인 컨테이너를 중지하고 볼륨을 삭제한 뒤 다시 실행합니다.
+
+```shell
+sh compose.sh rerun
+```
 
 정상 실행 시 다음과 같은 메시지가 출력됩니다.
 
